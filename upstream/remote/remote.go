@@ -58,6 +58,7 @@ func NewRemote(cfg Config) (*Remote, error) {
 		client: &http.Client{
 			Transport: &http.Transport{
 				MaxConnsPerHost: cfg.Threads,
+				TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
 			},
 			// Don't follow redirects
 			// Since the go http client strips the Authorization header when doing redirects (eg http -> https)
